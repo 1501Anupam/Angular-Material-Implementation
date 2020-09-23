@@ -11,3 +11,13 @@ div.container {
 form.normal-form {
     margin: 10px;
 }
+
+snack-bar-container.success {
+    background-color: #5cb85c;
+    color: #ffffff;
+}
+
+snack-bar-container.notification simple-snack-bar {
+    font-size: 18px;
+    font-weight: bold;
+}

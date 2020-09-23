@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DepartmentService } from 'src/app/shared/department.service';
 import { EmployeeService } from 'src/app/shared/employee.service';
+import { NotificationService } from 'src/app/shared/notification.service';
 
 @Component({
   selector: 'app-employee',
@@ -8,13 +10,6 @@ import { EmployeeService } from 'src/app/shared/employee.service';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
-
-  departments = [
-    {id: 1,value: 'Dep 1'},
-    {id: 1,value: 'Dep 2'},
-    {id: 1,value: 'Dep 3'}
-  ];
-
   form: FormGroup = new FormGroup({
     $key: new FormControl(null),
     fullName: new FormControl('', Validators.required),
@@ -27,9 +22,19 @@ export class EmployeeComponent implements OnInit {
     isPermanent: new FormControl(false)
   });
 
-  constructor() { }
+  constructor(private service: EmployeeService,
+    private deptService: DepartmentService,
+    private notificationService: NotificationService) { }
 
   ngOnInit(): void {
+    this.service.getEmployee();
   }
 
+  onSubmit() {
+    if (this.form.valid) {
+      this.service.insertEmployee(this.form.value);
+      this.form.reset();
+      this.notificationService.success(':: Submitted Successfully!');
+    }
+  }
 }
