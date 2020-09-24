@@ -14,13 +14,15 @@ import { environment } from 'src/environments/environment';
 import { DepartmentService } from './shared/department.service';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatConfigDialogComponent } from './mat-config-dialog/mat-config-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EmployeesComponent,
     EmployeeComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    MatConfigDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   providers: [EmployeeService, DepartmentService, { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },],
   bootstrap: [AppComponent],
-  entryComponents: [EmployeeComponent]
+  entryComponents: [EmployeeComponent, MatConfigDialogComponent]
 })
 export class AppModule { }

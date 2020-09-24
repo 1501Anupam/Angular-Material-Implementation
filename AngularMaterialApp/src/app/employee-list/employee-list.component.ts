@@ -5,6 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EmployeeComponent } from '../employees/employee/employee.component';
+import { NotificationService } from '../shared/notification.service';
+import { DialogService } from '../shared/dialog.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -13,7 +15,10 @@ import { EmployeeComponent } from '../employees/employee/employee.component';
 })
 export class EmployeeListComponent implements OnInit {
 
-  constructor(private employee: EmployeeService, private dialog: MatDialog) { }
+  constructor(private employee: EmployeeService,
+    private dialog: MatDialog,
+    private notification: NotificationService,
+    private dialogService: DialogService) { }
 
   listData: MatTableDataSource<any>;
   displayedColumns: string[] = ['fullName', 'email', 'mobile', 'city', 'actions'];
@@ -63,5 +68,15 @@ export class EmployeeListComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = "650px";
     this.dialog.open(EmployeeComponent, dialogConfig);
+  }
+
+  onDelete($key) {
+    this.dialogService.openConfirmDialogue('Are you sure to delete this record ?')
+      .afterClosed().subscribe(res => {
+        if (res) {
+          this.employee.deleteEmployee($key);
+          this.notification.warn('! Deleted Successfully');
+        }
+      });
   }
 }

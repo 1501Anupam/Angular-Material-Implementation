@@ -33,7 +33,7 @@
         <button mat-icon-button (click)="onEdit(row)">
           <mat-icon>launch</mat-icon>
         </button>
-        <button mat-icon-button color="warn">
+        <button mat-icon-button color="warn" (click)="onDelete(row.$key)">
           <mat-icon>delete_outline</mat-icon>
         </button>
       </mat-cell>
