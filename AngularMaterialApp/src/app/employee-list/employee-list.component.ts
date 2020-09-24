@@ -3,6 +3,8 @@ import { EmployeeService } from '../shared/employee.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EmployeeComponent } from '../employees/employee/employee.component';
 
 @Component({
   selector: 'app-employee-list',
@@ -11,12 +13,12 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class EmployeeListComponent implements OnInit {
 
-  constructor(private employee: EmployeeService) { }
+  constructor(private employee: EmployeeService, private dialog: MatDialog) { }
 
   listData: MatTableDataSource<any>;
   displayedColumns: string[] = ['fullName', 'email', 'mobile', 'city', 'actions'];
-  @ViewChild(MatSort) sort: MatSort; 
-  @ViewChild(MatPaginator) paginator: MatPaginator; 
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   searchKey: string;
 
 
@@ -45,4 +47,21 @@ export class EmployeeListComponent implements OnInit {
     this.listData.filter = this.searchKey.trim().toLocaleLowerCase();
   }
 
+  onClick() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "650px";
+    this.dialog.open(EmployeeComponent, dialogConfig);
+  }
+
+  onEdit(row) {
+    this.employee.selectedRow = row;
+    console.log(row);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "650px";
+    this.dialog.open(EmployeeComponent, dialogConfig);
+  }
 }

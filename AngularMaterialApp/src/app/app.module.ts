@@ -13,6 +13,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database'
 import { environment } from 'src/environments/environment';
 import { DepartmentService } from './shared/department.service';
 import { EmployeeListComponent } from './employee-list/employee-list.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule
   ],
-  providers: [EmployeeService, DepartmentService],
-  bootstrap: [AppComponent]
+  providers: [EmployeeService, DepartmentService, { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] },],
+  bootstrap: [AppComponent],
+  entryComponents: [EmployeeComponent]
 })
 export class AppModule { }

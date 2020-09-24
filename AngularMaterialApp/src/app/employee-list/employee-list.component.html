@@ -1,5 +1,5 @@
 <div class="search-box">
-  <button mat-raised-button>
+  <button mat-raised-button (click) = "onClick()">
     <mat-icon>add</mat-icon>Create
   </button>
   <mat-form-field class="search-form-field" floatLabel="never">
@@ -30,7 +30,7 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="onEdit(row)">
           <mat-icon>launch</mat-icon>
         </button>
         <button mat-icon-button color="warn">

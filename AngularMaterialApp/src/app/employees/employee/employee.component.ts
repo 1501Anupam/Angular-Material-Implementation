@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DepartmentService } from 'src/app/shared/department.service';
 import { EmployeeService } from 'src/app/shared/employee.service';
 import { NotificationService } from 'src/app/shared/notification.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-employee',
@@ -23,18 +24,27 @@ export class EmployeeComponent implements OnInit {
   });
 
   constructor(private service: EmployeeService,
-    private deptService: DepartmentService,
-    private notificationService: NotificationService) { }
+    public deptService: DepartmentService,
+    private notificationService: NotificationService,
+    public dialogRef: MatDialogRef<EmployeeComponent>) { }
 
   ngOnInit(): void {
     this.service.getEmployee();
+    this.form.patchValue(this.service.selectedRow);
   }
 
   onSubmit() {
     if (this.form.valid) {
       this.service.insertEmployee(this.form.value);
+      console.log(this.form.value);
       this.form.reset();
       this.notificationService.success(':: Submitted Successfully!');
+      this.onClose();
     }
+  }
+
+  onClose() {
+    this.form.reset();
+    this.dialogRef.close();
   }
 }

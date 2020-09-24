@@ -5,6 +5,7 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
   providedIn: 'root'
 })
 export class EmployeeService {
+  selectedRow: any;
 
   constructor(private firebase: AngularFireDatabase) { }
 

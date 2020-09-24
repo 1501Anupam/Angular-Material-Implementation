@@ -33,7 +33,7 @@
           <mat-select formControlName="department" placeholder="Department">
             <mat-option>None</mat-option>
             <ng-container *ngFor="let dept of deptService.array">
-              <mat-option value="{{ dept.$key }}">{{ dept.code }}-{{ dept.name }}</mat-option>
+              <mat-option [value]="dept.$key">{{ dept.code }}-{{ dept.name }}</mat-option>
             </ng-container>
           </mat-select>
         </mat-form-field>
