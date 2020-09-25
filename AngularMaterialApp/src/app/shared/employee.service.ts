@@ -24,7 +24,7 @@ export class EmployeeService {
       city: employee.city,
       gender: employee.gender,
       department: employee.department,
-      hireDate: employee.hireDate,
+      hireDate: employee.hireDate.toLocaleDateString(),
       isPermanent: employee.isPermanent,
     });
 
@@ -38,7 +38,7 @@ export class EmployeeService {
       city: employee.city,
       gender: employee.gender,
       department: employee.department,
-      hireDate: employee.hireDate,
+      hireDate: employee.hireDate.toLocaleDateString(),
       isPermanent: employee.isPermanent
     });
   }

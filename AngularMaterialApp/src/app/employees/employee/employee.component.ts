@@ -30,6 +30,9 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getEmployee();
+    if (this.service.selectedRow != null) {
+      this.form.controls.hireDate.setValue(new Date(this.service.selectedRow.hireDate));
+    }
     this.form.patchValue(this.service.selectedRow);
   }
 
